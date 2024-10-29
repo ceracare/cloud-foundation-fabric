@@ -29,7 +29,7 @@ module "project" {
     ? var.project_create.parent
     : null
   )
-  name = var.project_id
+  name = local.gcp_project_id
   services = [
     "run.googleapis.com",
     "compute.googleapis.com",
@@ -56,6 +56,7 @@ module "cloud_run" {
     )
   }
   ingress_settings = var.ingress_settings
+  gen2_execution_environment = var.gen2_execution_environment
 }
 
 # Reserved static IP for the Load Balancer
@@ -106,6 +107,7 @@ module "glb" {
       }
     }
   }
+  use_classic_version = var.use_classic_version
 }
 
 # Cloud Armor configuration

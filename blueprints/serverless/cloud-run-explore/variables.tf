@@ -52,15 +52,15 @@ variable "project_create" {
   default = null
 }
 
-variable "project_id" {
-  description = "Project ID."
-  type        = string
-}
+# variable "project_id" {
+#   description = "Project ID."
+#   type        = string
+# }
 
 variable "region" {
   description = "Cloud region where resource will be deployed."
   type        = string
-  default     = "europe-west1"
+  default     = "europe-west2"
 }
 
 variable "run_svc_name" {
@@ -77,4 +77,40 @@ variable "security_policy" {
     path_blocked = optional(string, "/login.html")
   })
   default = {}
+}
+
+variable "env" {
+  type        = string
+  description = "Short Environment name: dev, stage, prod. Passed through pipeline's environment name"
+  validation {
+    condition     = contains(["dev", "qa", "prod"], var.env)
+    error_message = "Environment can be only dev, qa or prod"
+  }
+}
+
+variable "repo_name" {
+  type        = string
+  description = "Repository name just. Supplied via a pipeline"
+}
+
+variable "app" {
+  type        = string
+  description = "Your project name. It's being used in Resources Name generation"
+}
+
+variable "project_suffix" {
+  type        = string
+  description = "Your project name. It's being used in GCP Project ID generation"
+}
+
+variable "gen2_execution_environment" {
+  description = "Use second generation execution environment."
+  type        = bool
+  default     = false
+}
+
+variable "use_classic_version" {
+  description = "Use classic Global Load Balancer."
+  type        = bool
+  default     = true
 }
