@@ -13,7 +13,7 @@ venv/*
 **/.test.lock
 .idea
 .idx/dev.nix
-backend.tf
+# backend.tf
 backend-config.hcl
 credentials.json
 key.json
